@@ -1,0 +1,35 @@
+.AnmiBackgroundBox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+
+    .AnmiListBox{
+        width: 100%;
+        height: 100%;  
+        background: rgba($color: #333, $alpha: 0.6);
+        background-image:repeating-linear-gradient(45deg,
+        rgba($color: #000000, $alpha: 0.1),
+        rgba($color: #000000, $alpha: 0.1) 15px,
+        transparent 0,
+        transparent 30px),
+        repeating-linear-gradient(-45deg,
+        rgba($color: #000000, $alpha: 0.1),
+        rgba($color: #000000, $alpha: 0.1) 15px,
+        transparent 0,
+        transparent 30px);
+        opacity: 1;
+        animation: scaleInOut 10s infinite;
+    }
+}
+@keyframes scaleInOut{
+    0%{
+        transform: scale(1.1)
+    }
+    50%{
+        transform: scale(1)
+    }
+    100%{
+        transform: scale(1.1)
+    }
+}

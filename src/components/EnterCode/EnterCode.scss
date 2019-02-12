@@ -1,0 +1,70 @@
+.EnterCodeBox {
+    width: 600px;
+    height: 350px;
+    background: #f1f1f1;
+    box-shadow: #333 -1px -1px 0 2px inset, #fff 1px 1px 0 2px inset;
+    border-radius: 10px;
+    font-weight: bold;
+    color: rgba($color: #000000, $alpha: 0.6);
+    position: relative;
+
+    .HandleClose {
+        width: 80px;
+        height: 80px;
+        background: #f1f1f1;
+        box-shadow: #999 -1px -1px 0 2px inset, #f9f9f9 1px 1px 0 2px inset;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        transform: translateX(50%) translateY(-50%);
+        border-radius: 20px;
+
+        &::after {
+            position: absolute;
+            content: '';
+            width: 50px;
+            height: 15px;
+            background: rgba($color: #888, $alpha: 1);
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            border-radius: 5px;
+        }
+
+        &::before {
+            position: absolute;
+            content: '';
+            width: 50px;
+            height: 15px;
+            background: rgba($color: #888, $alpha: 1);
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+            border-radius: 5px;
+        }
+    }
+
+    .Question {
+        width: 90%;
+        height: 80px;
+        font-size: 40px;
+        // background: #000;
+    }
+
+    .AnswerInput {
+        width: 90%;
+        height: 80px;
+        margin: 15px 0;
+        box-shadow: rgba($color: #333, $alpha: 0.2) 0 0 0 4px inset;
+        border-radius: 10px;
+
+        input {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            text-align: center;
+            outline: none;
+        }
+    }
+}
