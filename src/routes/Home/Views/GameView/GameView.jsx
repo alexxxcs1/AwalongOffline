@@ -5,6 +5,7 @@ import {api} from 'common/app'
 
 import entity from 'assets/entity.gif'
 
+import ReadyHall from './components/ReadyHall'
   
 export class GameView extends Component {
 constructor(props) {
@@ -37,8 +38,6 @@ EnterRoom(){
     this.state.roomkey = this.props.rk;
     let sessionid = window.localStorage.getItem('sessionid');
     let roomkey = this.state.roomkey;
-    console.log(roomkey);
-    
     let connection = new WebSocket('ws://hellworld.packy.club:8089/awalong');
     this.state.ws_connection = connection;
     this.setState(this.state);
@@ -58,11 +57,12 @@ EnterRoom(){
     };
     connection.onclose = function () {
     //   window.location.reload();
+      alert('网络连接已断开，请刷新重试');
     }
     //onerror
     connection.onerror = function (error) {
       console.log('WebSocket Error ' + error);
-      alert('网络连接失败，请刷新重试')
+      alert('网络连接失败，请刷新重试');
     };
     
     //to receive the message from server
@@ -82,11 +82,13 @@ EnterRoom(){
               self.setState(self.state);
               if (data.props.roomkey) {
                 api.EnterRoom(data.props.roomkey).then(res=>{
-                    console.log(res);
-                    
+                    if (res.code != 200) {
+                        alert('更新房间信息失败！');
+                        self.context.LinkRoute('index');
+                    }
                 },err=>{
                     alert('更新房间信息失败！')
-                    self.context.LinkRoute(data.props.to);
+                    // self.context.LinkRoute('index'); //编辑样式  暂时关闭退出房间
                 })
               }
               break;
@@ -101,7 +103,7 @@ customRoute(){
     };
     switch (this.state.roominfo.gamestatus) {
         case 'ready':
-            return 'game ready'
+            return <ReadyHall roominfo={this.state.roominfo}/>
         
     }
 }
