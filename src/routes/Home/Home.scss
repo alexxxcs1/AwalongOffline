@@ -6,7 +6,23 @@
     margin: 0 auto;
     // background: #f1f1f1;
     height: 100%;
-
+    .LoadinView{
+        width: 100%;
+        height: 100%;
+        background: rgba($color: #fff, $alpha: 0.7);
+        position: fixed;
+        z-index: 999;
+        top: 0%;
+        left: 0%;
+        
+        animation: FadeIn 0.2s forwards;
+        .LoadingBox{
+            width: 150px;
+            height: 150px;
+            background: rgba($color: #000, $alpha: 0.6);
+            border-radius: 6px;
+        }
+    }
     .TitleBox{
         width: 600px;
         // height: 200px;
@@ -39,5 +55,14 @@
             font-weight: bold;
             color: rgba($color: #000000, $alpha: 0.6)
         }
+    }
+}
+
+@keyframes FadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
     }
 }

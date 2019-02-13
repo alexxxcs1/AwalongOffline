@@ -8,10 +8,16 @@ export class CreateNewRoom extends Component {
 constructor(props) {
   super(props);
   this.state = {
+      roomcode:'',
+      roomcontent:'',
       isPublic:false,
+      userCount:5,
   };
      this.refreshProps = this.refreshProps.bind(this);
      this.HandlePublic = this.HandlePublic.bind(this);
+     this.onStateChange = this.onStateChange.bind(this);
+     this.onInputChange = this.onInputChange.bind(this);
+     this.createRoom = this.createRoom.bind(this);
 }
 componentWillReceiveProps(nextprops) {
   this.refreshProps(nextprops);
@@ -30,22 +36,39 @@ HandlePublic(boolean){
     this.state.isPublic = boolean;
     this.setState(this.state);
 }
+onInputChange(type,e){
+    this.state[type] = e.target.value;
+    this.setState(this.state);
+}
+onStateChange(type,value){
+    // console.log(type,value);
+    this.state[type] = value;
+    this.setState(this.state);
+}
+createRoom(){
+    if (!this.state.roomcode){
+        alert('请输入房间暗号');
+        return;
+    };
+    this.props.onSubmit(this.state.roomcode,this.state.roomcontent,this.state.userCount,this.state.isPublic);
+}
+
 render() {
   return (
     <DarkBox>
         <div className={[style.NewRoomBox,'childcenter childcolumn '].join(' ')}>
             <div className={style.HandleClose} onClick={this.props.onClose}></div>
             <div className={style.InputBox}>
-                <input type="text" placeholder='房间暗号(必填，把暗号告诉你的朋友)'/>
+                <input value={this.state.roomcode} type="text" placeholder='房间暗号(必填，把暗号告诉你的朋友)' onChange={this.onInputChange.bind(this, "roomcode")}/>
             </div>
             <div className={style.InputBox}>
-                <input type="text" placeholder='房间介绍(选填，在房间列表显示)'/>
+                <input value={this.state.roomcontent} type="text" placeholder='房间介绍(选填，在房间列表显示)'onChange={this.onInputChange.bind(this, "roomcontent")}/>
             </div>
             <div className={style.InputBox}>
                 <Select
                     placeholder={"请选择游戏人数"}
-                    // value={this.state.BankName}
-                    // onSelect={this.onStateChange.bind(this, "BankName")}
+                    value={this.state.userCount + '人局'}
+                    onSelect={this.onStateChange.bind(this, "userCount")}
                 />
             </div>
             <div className={[style.isPublic,'childcenter'].join(' ')}>
@@ -58,7 +81,7 @@ render() {
                     <div className={style.CheckName}>公开</div>
                 </div>
             </div>
-            <Button value='创建房间' onClick={()=>{}}/>
+            <Button value='创建房间' onClick={this.createRoom}/>
         </div>
     </DarkBox>
    )

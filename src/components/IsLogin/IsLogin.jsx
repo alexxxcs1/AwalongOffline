@@ -25,8 +25,9 @@ isLogin(){
             window.location.hash = '#/login'
         }else{
             window.localStorage.setItem('sessionid',res.data.sessionid);
+            window.localStorage.setItem('userinfo',JSON.stringify(res.data));
+            this.props.onCheckOver();
         }
-        
     },err=>{
 
     })

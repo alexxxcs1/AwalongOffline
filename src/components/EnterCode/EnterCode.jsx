@@ -6,8 +6,12 @@ import Button from 'components/Button'
 export class EnterCode extends Component {
 constructor(props) {
   super(props);
-  this.state = {};
+  this.state = {
+    roomcode:'',
+  };
      this.refreshProps = this.refreshProps.bind(this);
+     this.submit = this.submit.bind(this);
+     this.onInputChange = this.onInputChange.bind(this);
 }
 componentWillReceiveProps(nextprops) {
   this.refreshProps(nextprops);
@@ -18,6 +22,18 @@ componentDidMount() {
 refreshProps(props) {
   
 }
+submit(){
+  if (this.state.roomcode) {
+    this.props.onSubmit(this.state.roomcode);
+  }else{
+    alert('错误的房间暗号！')
+  }
+  
+}
+onInputChange(type,e){
+  this.state[type]= e.target.value;
+  this.setState(this.state);
+}
 render() {
   return (
     <DarkBox>
@@ -27,9 +43,9 @@ render() {
                 Who's there?
             </div>
             <div className={style.AnswerInput}>
-                <input type="text"/>
+                <input type="text" value={this.state.roomcode} onChange={this.onInputChange.bind(this,'roomcode')}/>
             </div>
-            <Button value='确定' onClick={()=>{}}/>
+            <Button value='确定' onClick={this.submit}/>
         </div>
     </DarkBox>
    )
