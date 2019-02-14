@@ -27,6 +27,11 @@ componentWillReceiveProps(nextprops) {
     }
   this.setState(this.state);
 }
+getChildContext() {
+  return {
+    ws: this.state.ws_connection
+  };
+}
 componentDidMount() {
   this.refreshProps(this.props);
   this.EnterRoom();
@@ -87,7 +92,7 @@ EnterRoom(){
                         self.context.LinkRoute('index');
                     }
                 },err=>{
-                    alert('更新房间信息失败！')
+                    // alert('更新房间信息失败！')          //编辑样式  暂时关闭退出房间
                     // self.context.LinkRoute('index'); //编辑样式  暂时关闭退出房间
                 })
               }
@@ -103,7 +108,7 @@ customRoute(){
     };
     switch (this.state.roominfo.gamestatus) {
         case 'ready':
-            return <ReadyHall roominfo={this.state.roominfo}/>
+            return <ReadyHall roominfo={this.state.roominfo} roomkey={this.state.roomkey}/>
         
     }
 }
@@ -122,5 +127,8 @@ render() {
 }
 GameView.contextTypes = {
     LinkRoute: PropTypes.func
+};
+GameView.childContextTypes = {
+  ws: PropTypes.object
 };
 export default GameView
