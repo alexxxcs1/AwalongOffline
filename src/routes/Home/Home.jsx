@@ -10,6 +10,8 @@ import EnterCode from 'components/EnterCode'
 import CreateNewRoom from 'components/CreateNewRoom'
 import LoadingBox from 'components/LoadingBox'
 
+import PlayingBox from './Views/GameView/components/PlayingBox' // 测试页面
+
 import forgotten from 'assets/forgotten.png'
 
 import ServerList from './Views/ServerList'
@@ -113,7 +115,6 @@ export class Home extends Component {
     
   }
   isLoginOver(){
-    console.log();
     let userinfo = JSON.parse(window.localStorage.getItem('userinfo'));
     if (userinfo) {
       if (userinfo.room!=null) {
@@ -136,6 +137,7 @@ export class Home extends Component {
         {this.state.EnterCodeInput? <EnterCode onClose={this.HandleEnterCode.bind(this,false)} onSubmit={this.onEnterRoom}/>:''}
         <IsLogin onCheckOver={this.isLoginOver}/>
         {this.customRoute()}
+        {/* <PlayingBox /> */}
         <AnmiBackgroundBox />
       </div>
     )

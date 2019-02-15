@@ -6,6 +6,7 @@ import {api} from 'common/app'
 import entity from 'assets/entity.gif'
 
 import ReadyHall from './components/ReadyHall'
+import PlayingBox from './components/PlayingBox'
   
 export class GameView extends Component {
 constructor(props) {

@@ -71,6 +71,9 @@ ReadyForGame(){
 render() {
    return (
    <div className={[style.ReadyHall,'childcenter childcolumn'].join(' ')}>
+       <div className={[style.RoomName,'childcenter'].join(' ')}>
+        {this.state.roominfo?this.state.roominfo.roomname:''}
+       </div>
        <div className={[style.Hall,'childcenter'].join(' ')}>
         <div className={[style.PlayerSiteBox,'childcenter'].join(' ')}>
             <div className={[style.PlayerSite,'childcenter'].join(' ')}>
