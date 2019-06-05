@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import AskPost from './AskPost'
 
-const host = 'http://hellworld.packy.club/awalong/'
+const host = '/awalong/'
 
 // 实例化 ajax请求对象
 const ajaxinstance = axios.create({
@@ -12,6 +12,7 @@ const ajaxinstance = axios.create({
   headers: {
     // responseType: 'JSON',
     // 'Content-Type': 'application/json'
+    withCredentials:true,
   }
 })
 
